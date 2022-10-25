@@ -718,8 +718,8 @@ def generateYaml(target, build_arch, write_to_file):
 					"on:\n" \
 					"  workflow_dispatch:\n".format(build_arch)
 	yaml_content += "  env:\n" \
-			"NAMESPACE: The namespace to build in (defaults to yosyshq)" \
-			"BUCKET_URL: Where to fetch earlier builds from (defaults to https://github.com/yosyshq/oss-cad-suite-build/releases/download/bucket)"
+			"    NAMESPACE: The namespace to build in (defaults to yosyshq)\n" \
+			"    BUCKET_URL: Where to fetch earlier builds from (defaults to https://github.com/yosyshq/oss-cad-suite-build/releases/download/bucket)\n"
 	if build_arch==getArchitecture():
 		yaml_content += "  schedule:\n" \
     					"    - cron: '30 0 * * *'\n\n"
