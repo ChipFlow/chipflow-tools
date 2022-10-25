@@ -88,14 +88,6 @@ jobs:
         with:
           path: _sources
           key: cache-sources-xdot
-      - name: Download previous build
-        run: |
-          URL="https://github.com/yosyshq/oss-cad-suite-build/releases/download/bucket-linux-x64/linux-x64-xdot.tgz"
-          if wget --spider "${URL}" 2>/dev/null; then
-              wget -qO- "${URL}" | tar xvfz -
-          else
-              echo "Previous version not found in bucket"
-          fi
       - name: Download linux-x64-python3
         run: wget -qO- "https://github.com/yosyshq/oss-cad-suite-build/releases/download/bucket-linux-x64/linux-x64-python3.tgz" | tar xvfz -
       - name: Build
