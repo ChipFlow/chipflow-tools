@@ -71,7 +71,7 @@ def ci(target, arch, rules, all):
 	validateArch(arch)
 	if all:
 		for val in architectures:
-			generateYaml("default", val, all)
+			generateYaml(target, val, all)
 	else:
 		generateYaml(target, arch, all)
 	
