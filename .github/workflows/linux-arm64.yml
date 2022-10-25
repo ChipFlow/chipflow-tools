@@ -7,6 +7,10 @@ on:
     types:
       - completed
 
+env:
+  NAMESPACE: chipflow-tools
+  BUCKET_URL: https://github.com/ChipFlow/chipflow-tools/releases/download/bucket
+
 jobs:
   linux-arm64-python3:
     runs-on: ubuntu-latest

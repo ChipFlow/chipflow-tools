@@ -7,6 +7,10 @@ on:
     types:
       - completed
 
+env:
+  NAMESPACE: chipflow-tools
+  BUCKET_URL: https://github.com/ChipFlow/chipflow-tools/releases/download/bucket
+
 jobs:
   windows-x64-yosys:
     runs-on: ubuntu-latest
