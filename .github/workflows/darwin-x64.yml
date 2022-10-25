@@ -2,7 +2,8 @@ name: darwin-x64
 
 on:
   workflow_dispatch:
-  workflow_run:
+  env:
+NAMESPACE: The namespace to build in (defaults to yosyshq)BUCKET_URL: Where to fetch earlier builds from (defaults to https://github.com/yosyshq/oss-cad-suite-build/releases/download/bucket)  workflow_run:
     workflows: [ linux-x64 ]
     types:
       - completed
