@@ -6,8 +6,9 @@ on:
     - cron: '30 0 * * *'
 
 env:
-  NAMESPACE: The namespace to build in (defaults to yosyshq)
-  BUCKET_URL: Where to fetch earlier builds from (defaults to https://github.com/yosyshq/oss-cad-suite-build/releases/download/bucket)
+  NAMESPACE: chipflow-tools
+  BUCKET_URL: https://github.com/ChipFlow/chipflow-tools/releases/download/bucket
+
 jobs:
   linux-x64-abc:
     runs-on: ubuntu-latest
