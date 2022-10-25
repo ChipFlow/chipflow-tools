@@ -629,7 +629,7 @@ def buildCode(build_target, build_arch, nproc, force, dry, pack_sources, single,
 			with open(os.path.join(output_dir, namespace, "share", "manifest.json"), "w") as manifest_file:
 				json.dump(metadata, manifest_file)
 
-		code = executeBuild(target, arch, prefix, build_dir if not target.top_package else output_dir, output_dir, nproc, pack_sources)
+		code = executeBuild(target, arch, os.path.join(build_dir,prefix), build_dir if not target.top_package else output_dir, output_dir, nproc, pack_sources)
 		if code!=0:
 			log_error("Script returned error code {}.".format(code))
 
