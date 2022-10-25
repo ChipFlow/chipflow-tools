@@ -1,0 +1,31 @@
+ChipFlow Tools
+--------------
+
+Welcome to the Open Source toolset for the [ChipFlow Service](https://chipflow.io) 
+
+Installation
+------------
+
+1. Download an archive matching your OS from the releases page at https://github.com/ChipFlow/chipflow-tools/releases/latest.
+2. Extract the archive to a location of your choice (for Windows it is recommended that path does not contain spaces)
+3. On macOS to allow execution of quarantined files run: ```./activate``` in extracted location once
+4. Set the environment as described below.
+
+Linux and macOS
+---------------
+export PATH="<extracted_location>/chipflow-tools/bin:$PATH"
+
+Windows
+-------
+from existing shell:
+<extracted_location>\chipflow-tools\environment.bat
+
+to create new shell window:
+<extracted_location>\chipflow-tools\start.bat
+
+Using the bundled Python3 (Linux and macOS only)
+------------------------------------------------
+
+Please use the bundled environment:
+
+source <extracted_location>/chipflow-tools/environment
