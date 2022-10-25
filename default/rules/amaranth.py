@@ -38,7 +38,7 @@ SourceLocation(
         vcs = 'git',
         location = 'https://gitlab.com/ChipFlow/amaranth-vexriscv.git',
         revision = 'origin/main',
-        license_file = 'LICENSE.txt',
+        license_file = 'LICENSE',
 )
 
 SourceLocation(
