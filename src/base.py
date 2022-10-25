@@ -405,6 +405,7 @@ def executeBuild(target, arch, prefix, build_dir, output_dir, nproc, pack_source
 	if (target.preload):
 		env['PRELOAD'] = 'True'
 
+	log_step(f"Using environment:  {env}")
 	scriptfile = tempfile.NamedTemporaryFile()
 	scriptfile.write("set -e -x\n".encode())
 	if (not target.top_package):
