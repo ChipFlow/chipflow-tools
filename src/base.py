@@ -561,7 +561,8 @@ def buildCode(build_target, build_arch, nproc, force, dry, pack_sources, single,
 						res.add(r)
 			deps += list(res)
 
-		prefix = os.path.join("/", os.environ.get("PREFIX","yosyshq"))
+		namespace = os.environ.get("NAMESPACE","yosyshq")
+		prefix = os.path.join("/", namespace)
 
 		packages = set()
 		for d in deps:
@@ -615,7 +616,7 @@ def buildCode(build_target, build_arch, nproc, force, dry, pack_sources, single,
 						for filename in sorted(files):
 							fpath = os.path.join(root, filename).replace(dep_dir,"")
 							if fpath.startswith(prefix):
-								name = fpath.replace(os.path.join("/",prefix,"/"),"")
+								name = fpath.replace(os.path.join(prefix,"/"),"")
 								if name.startswith("bin/"):
 									tools_meta[dep.name]['files'].append(name[4:])
 									tools_meta[dep.name]['package'] = dep.package
@@ -625,7 +626,7 @@ def buildCode(build_target, build_arch, nproc, force, dry, pack_sources, single,
 										package_meta[dep.package]['files'].append("libexec" + name[3:])
 			
 			metadata = dict({'version' : version_meta, 'packages' : package_meta, 'tools' : tools_meta })
-			with open(os.path.join(output_dir, prefix, "share", "manifest.json"), "w") as manifest_file:
+			with open(os.path.join(output_dir, namespace, "share", "manifest.json"), "w") as manifest_file:
 				json.dump(metadata, manifest_file)
 
 		code = executeBuild(target, arch, prefix, build_dir if not target.top_package else output_dir, output_dir, nproc, pack_sources)
@@ -686,12 +687,12 @@ def buildCode(build_target, build_arch, nproc, force, dry, pack_sources, single,
 			if arch == 'windows-x64':
 				package_name = target.release_name + "-" + arch + "-" + version_string +".exe"
 				log_step("Packing {} ...".format(package_name))
-				os.replace(os.path.join(output_dir, prefix), os.path.join(output_dir, target.release_name))
+				os.replace(os.path.join(output_dir, namespace), os.path.join(output_dir, target.release_name))
 				create_exe(package_name, target.release_name, output_dir)
 			else:
 				package_name = target.release_name + "-" + arch + "-" + version_string +".tgz"
 				log_step("Packing {} ...".format(package_name))
-				os.replace(os.path.join(output_dir, prefix), os.path.join(output_dir, target.release_name))
+				os.replace(os.path.join(output_dir, namespace), os.path.join(output_dir, target.release_name))
 				create_tar(package_name, target.release_name, output_dir)
 
 		log_step("Marking build finished ...")
@@ -716,6 +717,9 @@ def generateYaml(target, build_arch, write_to_file):
 	yaml_content =  "name: {}\n\n" \
 					"on:\n" \
 					"  workflow_dispatch:\n".format(build_arch)
+	yaml_content += "  env:\n" \
+			"NAMESPACE: The namespace to build in (defaults to yosyshq)" \
+			"BUCKET_URL: Where to fetch earlier builds from (defaults to https://github.com/yosyshq/oss-cad-suite-build/releases/download/bucket)"
 	if build_arch==getArchitecture():
 		yaml_content += "  schedule:\n" \
     					"    - cron: '30 0 * * *'\n\n"
