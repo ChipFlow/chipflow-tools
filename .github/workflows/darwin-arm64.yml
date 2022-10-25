@@ -2,14 +2,14 @@ name: darwin-arm64
 
 on:
   workflow_dispatch:
-  env:
-    NAMESPACE: The namespace to build in (defaults to yosyshq)
-    BUCKET_URL: Where to fetch earlier builds from (defaults to https://github.com/yosyshq/oss-cad-suite-build/releases/download/bucket)
   workflow_run:
     workflows: [ linux-arm ]
     types:
       - completed
 
+env:
+  NAMESPACE: The namespace to build in (defaults to yosyshq)
+  BUCKET_URL: Where to fetch earlier builds from (defaults to https://github.com/yosyshq/oss-cad-suite-build/releases/download/bucket)
 jobs:
   darwin-arm64-python3:
     runs-on: ubuntu-latest
