@@ -414,13 +414,16 @@ def executeBuild(target, arch, prefix, build_dir, output_dir, nproc, pack_source
 
 	scriptfile.flush()
 
+	host_prefix = os.path.join(cwd, os.path.split(output_dir)[0], "python3",os.path.relpath(prefix,"/"))
+	os.makedirs(host_prefix, exist_ok=True)
+
 	log_step("Compiling ...")
 	params = ['docker', 
 		'run', '--rm',
 		'--user', '{}:{}'.format(os.getuid(), os.getgid()),
 		'-v', '/tmp:/tmp',
 		'-v', '{}:/work'.format(cwd),
-		'-v', '{}:{}'.format(os.path.join(cwd, os.path.split(output_dir)[0], "python3",os.path.relpath(prefix,"/")), prefix),
+		'-v', '{}:{}'.format(host_prefix, prefix),
 		'-w', os.path.join('/work', os.path.relpath(build_dir, os.getcwd())),
 	]
 	for i, j in env.items():
